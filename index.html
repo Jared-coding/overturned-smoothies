@@ -1,1 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overturned Smoothies | Pure Fruit, No Fillers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink-bg: #ff6599;
+      --pink-dark: #e0487a;
+      --pink-light: #ff8fb3;
+      --cream: #fff5f7;
+      --text-main: #2b1220;
+      --text-muted: #6e4a5c;
+      --card-bg: #ffffff;
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.5rem 3rem;
+    }
+    .navbar {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-text {
+      font-weight: 900;
+      font-size: 1.8rem;
+      letter-spacing: -1px;
+      color: #ffffff;
+      text-transform: lowercase;
+    }
+    .logo-text span { color: #ffe3ec; }
+    
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 0.8; }
+    .nav-icon-btn {
+      background: #ffffff;
+      color: var(--pink-dark);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .nav-icon-btn:hover { transform: scale(1.08); }
+
+    /* Hero Section (Vibrant Pink Organic Shape Inspired by Ref) */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, var(--pink-bg) 0%, var(--pink-dark) 100%);
+      min-height: 90vh;
+      border-bottom-left-radius: 80px;
+      border-bottom-right-radius: 80px;
+      padding: 9rem 3rem 6rem;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .hero-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-content h1 {
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-content p {
+      color: #ffe6ed;
+      font-size: 1.15rem;
+      max-width: 520px;
+      font-weight: 600;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Thumbnail Selector Row (like reference) */
+    .hero-thumbs {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .thumb-pill {
+      width: 65px;
+      height: 65px;
+      background: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    .thumb-pill:hover, .thumb-pill.active {
+      border-color: #fff;
+      transform: scale(1.1);
+    }
+
+    /* Hero Featured Display Bowl */
+    .hero-display {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .hero-bowl {
+      width: 380px;
+      height: 380px;
+      background: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+      font-size: 9rem;
+      position: relative;
+      animation: floatBowl 5s ease-in-out infinite;
+    }
+    @keyframes floatBowl {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* Sections Container */
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+    .section-head {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--text-main);
+      text-align: center;
+      letter-spacing: -1px;
+      margin-bottom: 0.5rem;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 3.5rem;
+      font-size: 1.1rem;
+    }
+
+    /* Signature Menu Cards */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+    .menu-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      box-shadow: 0 15px 35px rgba(255, 101, 153, 0.08);
+      border: 2px solid #ffe3ec;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .menu-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 45px rgba(255, 101, 153, 0.18);
+      border-color: var(--pink-bg);
+    }
+    .menu-card-img {
+      height: 150px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .bg-strawberry { background: #fff0f3; }
+    .bg-tropical { background: #fffaf0; }
+    .bg-berry { background: #f3f0ff; }
+    .bg-lab { background: #2b1220; color: #fff; }
+
+    .smoothie-tag {
+      font-size: 0.75rem;
+      font-weight: 900;
+      color: var(--pink-dark);
+      background: #ffe3ec;
+      padding: 0.35rem 0.9rem;
+      border-radius: 50px;
+      display: inline-block;
+      margin-bottom: 0.8rem;
+    }
+    .menu-card h3 { font-size: 1.4rem; font-weight: 900; margin-bottom: 0.4rem; color: var(--text-main); }
+    .menu-ingredients { font-weight: 800; color: var(--pink-dark); font-size: 0.9rem; margin-bottom: 0.6rem; }
+    .menu-desc { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.8rem; font-weight: 600; }
+
+    .btn-action {
+      background: var(--pink-bg);
+      color: #fff;
+      padding: 0.9rem 1.8rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(255, 101, 153, 0.3);
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+    }
+    .btn-action:hover { background: var(--pink-dark); transform: translateY(-2px); }
+
+    /* Custom Smoothie Studio & White Plastic Cup */
+    .builder-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .builder-grid { grid-template-columns: 1fr; }
+    }
+    .panel-card {
+      background: #ffffff;
+      border-radius: var(--radius);
+      padding: 3rem;
+      box-shadow: 0 15px 35px rgba(255, 101, 153, 0.08);
+      border: 2px solid #ffe3ec;
+    }
+    .panel-card h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 1.2rem; color: var(--text-main); }
+
+    .size-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 2.2rem;
+    }
+    .size-btn {
+      background: #fff5f7;
+      border: 2px solid #ffe3ec;
+      border-radius: 18px;
+      padding: 16px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .size-btn:hover { background: #ffe3ec; }
+    .size-btn.active {
+      border-color: var(--pink-bg);
+      background: #ffe3ec;
+    }
+    .size-title { font-weight: 900; font-size: 1.05rem; display: block; color: var(--text-main); }
+    .size-volume { font-size: 0.75rem; color: var(--text-muted); display: block; margin: 3px 0; font-weight: 700; }
+    .size-price { font-weight: 900; color: var(--pink-dark); font-size: 1.15rem; display: block; }
+
+    .ingredient-group { margin-bottom: 1.8rem; }
+    .ingredient-label { font-weight: 900; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.8rem; display: block; letter-spacing: 1px; }
+    .ingredients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 12px;
+    }
+    .ing-btn {
+      background: #ffffff;
+      border: 2px solid #ffe3ec;
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+    .ing-btn:hover { border-color: var(--pink-bg); }
+    .ing-btn.selected {
+      background: #ffe3ec;
+      border-color: var(--pink-bg);
+      color: var(--pink-dark);
+    }
+
+    /* White Plastic Cup Visualizer */
+    .visualizer-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      background: linear-gradient(180deg, #fff5f7 0%, #ffe3ec 100%);
+      border-radius: 22px;
+      margin-bottom: 1.8rem;
+      min-height: 280px;
+      border: 2px solid #ffd1df;
+    }
+    .cup-wrapper {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      height: 180px;
+      width: 100%;
+    }
+    .white-cup {
+      background: #ffffff;
+      border: 4px solid #d1d5db;
+      border-top: none;
+      border-radius: 4px 4px 34px 34px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), inset -8px 0 15px rgba(0,0,0,0.03);
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .white-cup.small { width: 90px; height: 120px; }
+    .white-cup.medium { width: 105px; height: 145px; }
+    .white-cup.large { width: 120px; height: 170px; }
+
+    .cup-lid {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% + 14px);
+      height: 12px;
+      background: #ffffff;
+      border: 3px solid #d1d5db;
+      border-radius: 8px 8px 2px 2px;
+      z-index: 2;
+    }
+    .straw {
+      position: absolute;
+      top: -45px;
+      right: 26%;
+      width: 9px;
+      height: 70px;
+      background: linear-gradient(90deg, var(--pink-bg), #ff8fb3);
+      border-radius: 4px;
+      transform: rotate(12deg);
+      z-index: 1;
+    }
+    .cup-fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 85%;
+      background: linear-gradient(180deg, #ff6599 0%, #ff9ebb 100%);
+      transition: height 0.4s ease, background 0.4s ease;
+      border-radius: 0 0 30px 30px;
+    }
+    .cup-logo {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.65rem;
+      font-weight: 900;
+      color: var(--text-main);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-align: center;
+      width: 82%;
+      z-index: 3;
+      pointer-events: none;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 3px 0;
+      border-radius: 4px;
+    }
+
+    .price-summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.8rem;
+      padding-top: 1.2rem;
+      border-top: 2px dashed #ffe3ec;
+    }
+    .total-price { font-size: 2.3rem; font-weight: 900; color: var(--text-main); }
+
+    /* Add-ons & Allergy */
+    .addons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .addon-card {
+      background: #ffffff;
+      border-radius: var(--radius);
+      padding: 2.2rem;
+      box-shadow: 0 15px 35px rgba(255, 101, 153, 0.08);
+      border: 2px solid #ffe3ec;
+    }
+    .addon-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .addon-card h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 0.4rem; color: var(--text-main); }
+    .addon-price { font-size: 0.85rem; font-weight: 900; color: var(--pink-dark); text-transform: uppercase; margin-bottom: 0.8rem; display: block; letter-spacing: 1px; }
+    .addon-card p { color: var(--text-muted); font-size: 0.95rem; font-weight: 600; }
+
+    .allergy-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.2rem;
+      margin-bottom: 2.2rem;
+    }
+    @media (max-width: 768px) {
+      .allergy-grid { grid-template-columns: 1fr; }
+    }
+    .allergy-card {
+      background: #ffffff;
+      border-radius: var(--radius);
+      padding: 2.8rem;
+      box-shadow: 0 15px 35px rgba(255, 101, 153, 0.08);
+      border: 2px solid #ffe3ec;
+    }
+    .step-num {
+      width: 40px;
+      height: 40px;
+      background: #ffe3ec;
+      color: var(--pink-dark);
+      font-weight: 900;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+    }
+    .allergy-card h3 { font-size: 1.35rem; font-weight: 900; margin-bottom: 0.8rem; color: var(--text-main); }
+    .allergy-card p { color: var(--text-muted); font-size: 0.95rem; font-weight: 600; }
+    
+    .rule-banner {
+      background: #00b894;
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 2.8rem;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 184, 148, 0.25);
+    }
+    .rule-banner h3 { font-size: 1.6rem; font-weight: 900; margin-bottom: 0.5rem; }
+    .rule-banner p { font-size: 1.15rem; opacity: 0.95; font-weight: 700; }
+
+    /* Contact Box */
+    .contact-container { max-width: 800px; margin: 0 auto; }
+    .contact-box {
+      background: var(--text-main);
+      border-radius: 36px;
+      padding: 4rem 3rem;
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(43, 18, 32, 0.3);
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+    .input-field {
+      background: #401b2f;
+      border: 2px solid #592542;
+      padding: 1.2rem 1.5rem;
+      border-radius: 18px;
+      color: #fff;
+      font-size: 1rem;
+      font-family: inherit;
+      font-weight: 600;
+    }
+    .input-field:focus { outline: none; border-color: var(--pink-bg); }
+
+    footer {
+      text-align: center;
+      padding: 3.5rem 2rem;
+      background: #1a0a13;
+      color: #b8869c;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <nav class="navbar">
+      <a href="#home" class="logo-text">smothie<span>s</span></a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#menu">Specialities</a></li>
+        <li><a href="#builder">Custom Studio</a></li>
+        <li><a href="#allergy">Safety</a></li>
+        <li><a href="https://lab.overturnedsmoothies.co.uk" target="_blank" style="color: #fff;">Flavor Lab 🧪</a></li>
+      </ul>
+      <div style="display: flex; gap: 1rem;">
+        <a href="#builder" class="nav-icon-btn">🛒</a>
+        <a href="#contact" class="nav-icon-btn">♥</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section (Inspired by reference layout) -->
+  <section id="home" class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1>SMOOTHIES</h1>
+        <p>Smoothies are great summertime drinks and snack for kids and families. It is refreshing, delicious as well as a source of protein, fibre, vitamins and minerals.</p>
+        
+        <!-- Interactive thumbnail row inspired by your ref image -->
+        <div class="hero-thumbs">
+          <div class="thumb-pill active" onclick="updateHero('🍓', 'Strawberry & Banana', 'bg-strawberry')">🍓</div>
+          <div class="thumb-pill" onclick="updateHero('🥭', 'Tropical Blast', 'bg-tropical')">🥭</div>
+          <div class="thumb-pill" onclick="updateHero('🍇', 'Berry Blizzard', 'bg-berry')">🍇</div>
+          <div class="thumb-pill" onclick="updateHero('🧪', 'Mad Scientist Lab', 'bg-lab')">🧪</div>
+        </div>
+      </div>
+
+      <div class="hero-display">
+        <div class="hero-bowl" id="heroBowl">🍓</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: SIGNATURE MENU (2x2 Grid with Mad Scientist Under Tropical Blast) -->
+  <section id="menu" class="section-container">
+    <h2 class="section-head">Freshly Blended Specialities</h2>
+    <p class="section-sub">Handcrafted recipes using pure, flash-frozen fruit with zero artificial fillers.</p>
+
+    <div class="menu-grid">
+      <!-- Item 1 -->
+      <div class="menu-card">
+        <div>
+          <div class="menu-card-img bg-strawberry">🍓</div>
+          <span class="smoothie-tag">SMOOTHIE NO. 1</span>
+          <h3>Strawberry & Banana</h3>
+          <p class="menu-ingredients">Ice, Frozen Strawberries, Frozen Banana, Milk</p>
+          <p class="menu-desc">just a classic ain't it?</p>
+        </div>
+        <button class="btn-action" onclick="alert('Added Strawberry & Banana to your order!')">Select Blend</button>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="menu-card">
+        <div>
+          <div class="menu-card-img bg-tropical">🥭</div>
+          <span class="smoothie-tag">SMOOTHIE NO. 2</span>
+          <h3>Tropical Blast</h3>
+          <p class="menu-ingredients">Ice, Frozen Mango, Frozen Papaya, Frozen Pineapple</p>
+          <p class="menu-desc">this will take you to your imaginary Hawaii</p>
+        </div>
+        <button class="btn-action" onclick="alert('Added Tropical Blast to your order!')">Select Blend</button>
+      </div>
+
+      <!-- Item 3: Mad Scientist (Placed under Tropical Blast) -->
+      <div class="menu-card bg-lab" style="color: #fff;">
+        <div>
+          <div class="menu-card-img" style="background: #190a13;">🧪</div>
+          <span class="smoothie-tag" style="background: #401b2f; color: #ff8fb3;">SMOOTHIE NO. 4</span>
+          <h3 style="color: #fff;">The Mad Scientist</h3>
+          <p class="menu-ingredients" style="color: #ff8fb3;">Pick your baseline fruits & invent your own custom mashup!</p>
+          <p class="menu-desc" style="color: #d1a3b8;">Unleash your inner flavor creator in our lab subdomain!</p>
+        </div>
+        <a href="https://lab.overturnedsmoothies.co.uk" target="_blank" class="btn-action" style="background: linear-gradient(135deg, #ff6599, #ff9f43); text-align: center; text-decoration: none; display: block;">⚡ Visit Flavor Lab</a>
+      </div>
+
+      <!-- Item 4: Berry Blizzard -->
+      <div class="menu-card">
+        <div>
+          <div class="menu-card-img bg-berry">🍇</div>
+          <span class="smoothie-tag">SMOOTHIE NO. 3</span>
+          <h3>Berry Blizzard</h3>
+          <p class="menu-ingredients">Ice, Frozen Strawberries, Frozen Blackcurrant, Frozen Raspberries</p>
+          <p class="menu-desc">this is sour</p>
+        </div>
+        <button class="btn-action" onclick="alert('Added Berry Blizzard to your order!')">Select Blend</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: CUSTOM SMOOTHIE STUDIO (Interactive Builder & White Cup) -->
+  <section id="builder" class="section-container" style="padding-top: 0;">
+    <h2 class="section-head">Custom Smoothie Studio</h2>
+    <p class="section-sub">Select your cup size, pick fresh ingredients, and watch your drink come to life.</p>
+
+    <div class="builder-grid">
+      <!-- Left Column: Controls -->
+      <div class="panel-card">
+        <h3>1. Choose Cup Size</h3>
+        <div class="size-options">
+          <div class="size-btn active" onclick="selectSize('small', 3.50, '350ml')">
+            <span class="size-title">Small</span>
+            <span class="size-volume">350ml</span>
+            <span class="size-price">£3.50</span>
+          </div>
+          <div class="size-btn" onclick="selectSize('medium', 4.50, '500ml')">
+            <span class="size-title">Medium</span>
+            <span class="size-volume">500ml</span>
+            <span class="size-price">£4.50</span>
+          </div>
+          <div class="size-btn" onclick="selectSize('large', 5.50, '700ml')">
+            <span class="size-title">Large</span>
+            <span class="size-volume">700ml</span>
+            <span class="size-price">£5.50</span>
+          </div>
+        </div>
+
+        <h3>2. Select Fresh Ingredients</h3>
+        <div class="ingredient-group">
+          <span class="ingredient-label">Fruit Bases:</span>
+          <div class="ingredients-grid">
+            <button class="ing-btn" onclick="toggleIngredient(this, 'Strawberry', 0, '#ff6599')">🍓 Strawberry</button>
+            <button class="ing-btn" onclick="toggleIngredient(this, 'Mango', 0, '#ffb142')">🥭 Mango</button>
+            <button class="ing-btn" onclick="toggleIngredient(this, 'Banana', 0, '#feca57')">🍌 Banana</button>
+            <button class="ing-btn" onclick="toggleIngredient(this, 'Pineapple', 0, '#ffeaa7')">🍍 Pineapple</button>
+            <button class="ing-btn" onclick="toggleIngredient(this, 'Raspberry', 0, '#ff6b81')">🍇 Raspberry</button>
+          </div>
+        </div>
+
+        <div class="ingredient-group">
+          <span class="ingredient-label">Boosters (+50p each):</span>
+          <div class="ingredients-grid">
+            <button class="ing-btn" onclick="toggleIngredient(this, 'Chia Seeds', 0.50, null)">🌱 Chia Seeds</button>
+            <button class="ing-btn" onclick="toggleIngredient(this, 'Oat Milk', 0.50, null)">🥛 Oat Milk</button>
+            <button class="ing-btn" onclick="toggleIngredient(this, 'Protein', 0.50, null)">⚡ Protein</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: White Plastic Cup Visualizer -->
+      <div class="panel-card">
+        <h3>Your Custom Cup Preview</h3>
+        
+        <div class="visualizer-container">
+          <div class="cup-wrapper">
+            <div class="straw"></div>
+            <div id="cup" class="white-cup small">
+              <div class="cup-lid"></div>
+              <div id="cup-fill" class="cup-fill"></div>
+              <div class="cup-logo">Overturned</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="price-summary">
+          <div>
+            <div style="font-weight: 900; color: var(--text-main);" id="size-label">Small (350ml)</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 700;" id="ingredients-summary">Base size price</div>
+          </div>
+          <div class="total-price" id="total-price">£3.50</div>
+        </div>
+
+        <button class="btn-action" style="padding: 1.1rem; font-size: 1rem;" onclick="alert('This is a concept prototype! Direct online ordering is coming soon.')">Blend & Order Now 🚀</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADD-ONS SECTION -->
+  <section id="addons" class="section-container" style="padding-top: 0;">
+    <h2 class="section-head">Menu Add-Ons & Rules</h2>
+    <p class="section-sub">Personalize your drink to fit your lifestyle.</p>
+
+    <div class="addons-grid">
+      <div class="addon-card">
+        <div class="addon-icon">💪</div>
+        <h3>Protein Powder Boost</h3>
+        <span class="addon-price">+50P EXTRA</span>
+        <p>Clean protein boost to power workouts and maintain fullness.</p>
+      </div>
+
+      <div class="addon-card">
+        <div class="addon-icon">🌾</div>
+        <h3>Oat Milk Upgrade</h3>
+        <span class="addon-price" style="color: #00b894;">100% FREE UPGRADE</span>
+        <p>Creamy dairy-free alternative for a silky smoothie texture.</p>
+      </div>
+
+      <div class="addon-card">
+        <div class="addon-icon">🚫</div>
+        <h3>No Added Sugar</h3>
+        <span class="addon-price" style="color: var(--pink-bg);">NATURAL FRUIT ONLY</span>
+        <p>We never use artificial syrups or unneeded added sugars.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALLERGY SAFETY SECTION -->
+  <section id="allergy" class="section-container" style="padding-top: 0;">
+    <h2 class="section-head">Cross-Contamination Free Strategy</h2>
+    <p class="section-sub">How we keep customers with severe food allergies 100% safe.</p>
+
+    <div class="allergy-grid">
+      <div class="allergy-card">
+        <div class="step-num">1</div>
+        <h3>Fresh-to-Freeze Line</h3>
+        <p>We purchase fresh strawberries, bananas, mangoes, pineapples, and raspberries from quality produce aisles. They are washed, hand-chopped, and flash-frozen on flat trays before sorting into labeled containers.</p>
+      </div>
+
+      <div class="allergy-card">
+        <div class="step-num">2</div>
+        <h3>Strict Sanitization</h3>
+        <p>Every blender, pitcher, and utensil is thoroughly washed and sanitized between every order to maintain absolute safety standards.</p>
+      </div>
+    </div>
+
+    <div class="rule-banner">
+      <h3>The Overturned Rule</h3>
+      <p>"Because nothing is mixed together in a factory bag, your ingredients NEVER touch other cross-contaminants. Our stand is 100% allergy safe!"</p>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM SECTION -->
+  <section id="contact" class="section-container" style="padding-top: 0;">
+    <div class="contact-container">
+      <div class="contact-box">
+        <h2 style="font-size: 2.5rem; font-weight: 900; letter-spacing: -1px;">Get in Touch</h2>
+        <p style="color: #b8869c; margin-top: 0.5rem; font-size: 1.05rem; font-weight: 600;">Send us your order preference or event catering inquiries!</p>
+
+        <form name="smoothie-contact" method="POST" data-netlify="true" class="contact-form">
+          <input type="text" name="name" class="input-field" placeholder="YOUR NAME (e.g. Alex)" required>
+          <input type="email" name="email" class="input-field" placeholder="EMAIL ADDRESS (alex@example.com)" required>
+          <textarea name="message" class="input-field" rows="4" placeholder="Mention your smoothie choice, size, and add-ons..." required></textarea>
+          <button type="submit" class="btn-action" style="padding: 1.2rem; font-size: 1.05rem;">Send Message 🚀</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Overturned Smoothies. Pure Fruit, No Fillers.</p>
+  </footer>
+
+  <script>
+    function updateHero(emoji, title, bgClass) {
+      document.getElementById('heroBowl').innerText = emoji;
+      document.querySelectorAll('.thumb-pill').forEach(el => el.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+    }
+
+    let currentBasePrice = 3.50;
+    let selectedSizeName = "Small";
+    let selectedVolume = "350ml";
+    let activeIngredients = [];
+
+    function selectSize(size, price, volume) {
+      currentBasePrice = price;
+      selectedSizeName = size.charAt(0).toUpperCase() + size.slice(1);
+      selectedVolume = volume;
+
+      const buttons = document.querySelectorAll('.size-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+
+      const cup = document.getElementById('cup');
+      cup.className = 'white-cup ' + size;
+
+      updateTotal();
+    }
+
+    function toggleIngredient(btn, name, extraPrice, color) {
+      btn.classList.toggle('selected');
+
+      const index = activeIngredients.findIndex(item => item.name === name);
+      if (index > -1) {
+        activeIngredients.splice(index, 1);
+      } else {
+        activeIngredients.push({ name, extraPrice, color });
+      }
+
+      const coloredFruits = activeIngredients.filter(i => i.color);
+      const fill = document.getElementById('cup-fill');
+      if (coloredFruits.length > 0) {
+        fill.style.background = coloredFruits[coloredFruits.length - 1].color;
+      } else {
+        fill.style.background = 'linear-gradient(180deg, #ff6599 0%, #ff9ebb 100%)';
+      }
+
+      updateTotal();
+    }
+
+    function updateTotal() {
+      const extraCosts = activeIngredients.reduce((sum, item) => sum + item.extraPrice, 0);
+      const total = (currentBasePrice + extraCosts).toFixed(2);
+
+      document.getElementById('total-price').innerText = `£${total}`;
+      document.getElementById('size-label').innerText = `${selectedSizeName} (${selectedVolume})`;
+
+      const names = activeIngredients.map(i => i.name);
+      document.getElementById('ingredients-summary').innerText = names.length > 0 
+        ? names.join(', ') 
+        : 'Base size price';
+    }
+  </script>
+</body>
+</html>
 
