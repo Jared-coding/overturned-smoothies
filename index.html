@@ -274,6 +274,32 @@
       font-size: 1.1rem;
     }
 
+    .price-size-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      max-width: 850px;
+      margin: 0 auto 3rem;
+    }
+    .price-size-card {
+      background: #fff;
+      border: 2px solid #ffe3ec;
+      border-radius: 22px;
+      padding: 1.25rem 1rem;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(255, 101, 153, 0.08);
+    }
+    .price-size-card h3 { font-size: 1rem; color: var(--text-main); margin-bottom: .25rem; }
+    .price-size-card p { color: var(--text-muted); font-size: .85rem; font-weight: 700; }
+    .price-size-card strong { display: block; color: var(--pink-dark); font-size: 1.8rem; font-weight: 900; margin-top: .35rem; }
+    @media (max-width: 600px) {
+      .price-size-grid { gap: .5rem; }
+      .price-size-card { padding: 1rem .4rem; }
+      .price-size-card h3 { font-size: .85rem; }
+      .price-size-card p { font-size: .72rem; }
+      .price-size-card strong { font-size: 1.35rem; }
+    }
+
     /* Menu Cards Grid */
     .menu-grid {
       display: grid;
@@ -415,6 +441,12 @@
   <section id="menu" class="section-container">
     <h2 class="section-head">Freshly Blended Specialities</h2>
     <p class="section-sub">Handcrafted recipes using pure, flash-frozen fruit with zero artificial fillers.</p>
+
+    <div class="price-size-grid" aria-label="Smoothie sizes and prices">
+      <div class="price-size-card"><h3>Small</h3><p>350ml</p><strong>£3.95</strong></div>
+      <div class="price-size-card"><h3>Medium</h3><p>500ml</p><strong>£4.95</strong></div>
+      <div class="price-size-card"><h3>Large</h3><p>700ml</p><strong>£5.95</strong></div>
+    </div>
 
     <div class="menu-grid">
       <div class="menu-card">
